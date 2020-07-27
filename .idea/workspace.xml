@@ -62,9 +62,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="332" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595806961026" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1595815332997">
+    <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog" timestamp="1595823643076">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595815332997" />
+    <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595823643076" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1595824472882">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595824472882" />
   </component>
 </project>

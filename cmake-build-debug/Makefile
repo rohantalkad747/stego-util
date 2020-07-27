@@ -122,33 +122,6 @@ files/fast:
 	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/build
 .PHONY : files/fast
 
-cat.obj: cat.c.obj
-
-.PHONY : cat.obj
-
-# target to build an object file
-cat.c.obj:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/cat.c.obj
-.PHONY : cat.c.obj
-
-cat.i: cat.c.i
-
-.PHONY : cat.i
-
-# target to preprocess a source file
-cat.c.i:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/cat.c.i
-.PHONY : cat.c.i
-
-cat.s: cat.c.s
-
-.PHONY : cat.s
-
-# target to generate assembly for a file
-cat.c.s:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/cat.c.s
-.PHONY : cat.c.s
-
 stego.obj: stego.c.obj
 
 .PHONY : stego.obj
@@ -185,9 +158,6 @@ help:
 	@echo ... edit_cache
 	@echo ... files
 	@echo ... rebuild_cache
-	@echo ... cat.obj
-	@echo ... cat.i
-	@echo ... cat.s
 	@echo ... stego.obj
 	@echo ... stego.i
 	@echo ... stego.s

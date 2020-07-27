@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Rohan/Downloads/files/cat.c" "C:/Users/Rohan/Downloads/files/cmake-build-debug/CMakeFiles/files.dir/cat.c.obj"
   "C:/Users/Rohan/Downloads/files/stego.c" "C:/Users/Rohan/Downloads/files/cmake-build-debug/CMakeFiles/files.dir/stego.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

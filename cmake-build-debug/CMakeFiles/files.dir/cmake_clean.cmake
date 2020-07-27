@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/files.dir/cat.c.obj"
   "CMakeFiles/files.dir/stego.c.obj"
   "files.exe"
   "files.exe.manifest"

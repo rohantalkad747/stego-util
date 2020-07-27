@@ -74,9 +74,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Rohan/Downloads/files/cat.c">
-			<Option target="files"/>
-		</Unit>
 		<Unit filename="C:/Users/Rohan/Downloads/files/stego.c">
 			<Option target="files"/>
 		</Unit>

@@ -16,27 +16,71 @@
 
 typedef unsigned char BYTE;
 
-BYTE* stob(char *str);
+BYTE* stob(char* str);
 BYTE* itob(int num);
-void encode(char *str, BYTE* img, int offset);
+void encode(BYTE* strb, BYTE* img, int offset);
 char* decode(BYTE* img);
+int get_num_bytes(FILE* f);
+int encode_driver(char* str, char* filename);
+void fcpy(FILE *, FILE *);
+int cat(int argc, char *argv[]);
 
 
-int main(int argc, char *argv[]) {
-    FILE* fsrc = fopen(argv[0], "r");
-    char* msg = argv[1];
+int get_num_bytes(FILE* f) {
+    int bytes = 0;
+    while (getc(f) != EOF)
+        bytes++;
+    return bytes;
 }
 
-void encode(char* str, BYTE* img, int offset) {
-    int len = strlen(str);
-    BYTE* strb = stob(str);
+int cat(int argc, char *argv[])
+{
+    FILE *f;
+    if (argc == 1) {
+        fcpy(stdin, stdout);
+        putc('\n', stdout);
+    } else {
+        while (--argc) {
+            if ((f = fopen(*++argv, "r")) != NULL) {
+                fcpy(f, stdout);
+                fclose(f);
+                putc('\n', stdout);
+            }
+        }
+    }
+    return 0;
+}
+
+void fcpy(FILE *ipf, FILE *opf)
+{
+    int c;
+    while ((c = getc(ipf)) != EOF)
+        putc(c, opf);
+}
+
+
+int encode_driver(char* str, char* filename) {
+    FILE* fsrc = fopen(filename, "rb");
+
+    int num_bytes = get_num_bytes(fsrc);
+    BYTE* img_bytes = (BYTE *) malloc (sizeof(BYTE) * num_bytes);
+    fread(img_bytes, sizeof(img_bytes),1,fsrc);
+
+    BYTE* len_bytes = itob(strlen(str));
+    encode(len_bytes, img_bytes, OFFSET);
+
+    BYTE* str_bytes = stob(str);
+    encode(str_bytes, img_bytes, OFFSET + 32);
+}
+
+void encode(BYTE* strb, BYTE* img, int offset) {
+    int len = sizeof (strb);
     for (int i = 0; i < len; i++) {
         int addition = strb[i];
         for (int b = 7; b >= 0; b--, offset++) {
             int additionBit = (addition >> b) & 1;
-            if ((additionBit != img[offset]) & 1) {
+            if ((additionBit != img[offset]) & 1)
                 img[offset] = (img[offset] & 0xfe) | additionBit;
-            }
         }
     }
 }
@@ -57,32 +101,27 @@ BYTE* stob(char* str) {
         exit(1);
     }
     int i = -1;
-    while (str[++i] != '\0') {
+    while (str[++i] != '\0')
         bytes[i] = str[i];
-    }
     return bytes;
 }
 
 char* decode(BYTE* img) {
     int msg_length = 0;
     int end_bit = OFFSET + 32;
-    for (int i = OFFSET; i < end_bit; i++) {
+    for (int i = OFFSET; i < end_bit; i++)
         msg_length = (msg_length << 1) | (img[i] & 1);
-    }
     BYTE* str_bytes = (BYTE*) malloc(sizeof(BYTE) * msg_length);
     if (str_bytes == NULL) {
         printf("Failed to allocate memory while decoding!");
         exit(1);
     }
-    for (int j = 0; j < msg_length; j++) {
-        for (int k = 0; k < 8; k++, end_bit++) {
+    for (int j = 0; j < msg_length; j++)
+        for (int k = 0; k < 8; k++, end_bit++)
             str_bytes[j] = (str_bytes[j] << 1) | (img[end_bit] & 1);
-        }
-    }
     char* str = (char*) malloc(sizeof(char) * msg_length);
-    while (str_bytes != NULL) {
+    while (str_bytes != NULL)
         *str++ = (char) *str_bytes++;
-    }
     free(str_bytes);
     return str;
 }
