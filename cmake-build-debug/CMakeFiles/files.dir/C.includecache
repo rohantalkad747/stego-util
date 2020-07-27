@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Rohan/Downloads/files/cat.c
+stdio.h
+-
+
+C:/Users/Rohan/Downloads/files/stego.c
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+
