@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
+
 
 /**
  * Provides text-encoding and decoding capabilities for images. Due to the nature of the algo (edits to bits),
@@ -24,6 +26,10 @@
 
 /* Index of bit where we start encoding the length and message */
 #define OFFSET 24
+
+#define TRUE 1
+
+#define FALSE 0
 
 typedef unsigned char BYTE;
 
@@ -73,10 +79,121 @@ void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_byte
 
 void handle_fread_err(const FILE *fsrc);
 
+void encode_length_and_message(const char *str, const char *destname, int num_bytes, const BYTE *img_bytes);
+
+
+#define MAX_TABLE 5
+#define MAX_KEY 8
+#define MAX_DATA 12
+
+struct node {
+    char key[MAX_KEY];
+    char *value;
+    struct node *next;
+};
+
+typedef struct node Node;
+
+Node * tb[MAX_TABLE];
+char keys[MAX_DATA][MAX_KEY];
+int values[MAX_DATA];
+
+void init() {
+    for (int i = 0; i < MAX_TABLE; ++i) {
+        Node * cur = tb[i];
+        Node * tmp;
+        while (cur != NULL) {
+            tmp = cur;
+            cur = cur->next;
+            free(tmp);
+        }
+        tb[i] = NULL;
+    }
+}
+
+void my_str_cpy(char * dest, const char * src) {
+    while ((*dest++ = *src++) != '\0');
+}
+
+int my_str_cmp(const char * str1, const char * str2) {
+    while (*str1 != '\0' && (*str1 == *str2)) {
+        str1++;
+        str2++;
+    }
+    return *str1 - *str2;
+}
+
+int hash(const char * str) {
+    int hash = 401;
+    while (*str != '\0')
+    {
+        hash = ((hash << 4) + (int)(*str)) % MAX_TABLE;
+        str++;
+    }
+    return hash % MAX_TABLE;
+}
+
+void add(const char * key, char * value) {
+    Node * new_node = (Node *)malloc(sizeof(Node));
+    my_str_cpy(new_node->key, key);
+    new_node->value = value;
+    new_node->next = NULL;
+    int index = hash(key);
+    if (tb[index] == NULL)
+    {
+        tb[index] = new_node;
+    }
+    else
+    {
+        Node * cur = tb[index];
+        while (cur != NULL) {
+            if (my_str_cmp(cur->key, key) == 0) {
+                cur->value = value;
+                return;
+            }
+            cur = cur->next;
+        }
+        new_node->next = tb[index];
+        tb[index] = new_node;
+    }
+}
+
+int find(const char * key, int * val) {
+
+    int index = hash(key);
+
+    Node * cur = tb[index];
+
+    // Find key by traversing list one by one
+    while (cur != NULL) {
+        if (my_str_cmp(cur->key, key) == 0) {
+            *val = cur->value;
+            return TRUE;
+        }
+        cur = cur->next;
+    }
+    return FALSE;
+
+}
+
 int main(int argc, char *argv[])
 {
     encode_driver("my text", "port.jpg", "temp.jpg");
     decode_driver("temp.jpg");
+}
+
+struct DataItem *parse_args(char *argv[]) {
+    char tmp_key[MAX_KEY];
+    init();
+
+
+    char* c;
+    while ((c = *argv++) != NULL) {
+        if (c[0] == '-' && c[1] == '-')
+        {
+            add(c, *argv++);
+        }
+    }
 }
 
 int get_num_bytes(FILE *f)
@@ -120,31 +237,37 @@ void encode_driver(char *str, char *filename, char *destname)
     size_t ret_code = fread(img_bytes, 1, num_bytes, fsrc);
     if ( ret_code == num_bytes )
     {
-        int trgt_length = strlen(str);
-        BYTE *len_bytes = itob(trgt_length);
-
-        // Length of this encoding is 4 bytes because this is a 32 bit number
-        encode(len_bytes, 4, img_bytes, OFFSET);
-
-        BYTE *str_bytes = stob(str);
-        encode(str_bytes, trgt_length, img_bytes, OFFSET + 32);
-
-        FILE *fdest = fopen(destname, "wb");
-        fwrite(img_bytes, 1, num_bytes, fdest);
+        encode_length_and_message(str, destname, num_bytes, img_bytes);
     } else
     {
         handle_fread_err(fsrc);
     }
 }
 
+void encode_length_and_message(const char *str, const char *destname, int num_bytes, const BYTE *img_bytes)
+{
+    int trgt_length = strlen(str);
+    BYTE *len_bytes = itob(trgt_length);
+    // Length of this encoding is 4 bytes because this is a 32 bit number
+    encode(len_bytes, 4, img_bytes, OFFSET);
+    BYTE *str_bytes = stob(str);
+    encode(str_bytes, trgt_length, img_bytes, OFFSET + 32);
+    FILE *fdest = fopen(destname, "wb");
+    fwrite(img_bytes, 1, num_bytes, fdest);
+}
+
 void handle_fread_err(const FILE *fsrc)
 {
     if ( ferror(fsrc))
+    {
         perror("Error reading file");
-    else if ( feof(fsrc))
+    } else if ( feof(fsrc))
+    {
         perror("EOF found");
-    else
+    } else
+    {
         perror("Error opening file");
+    }
 }
 
 void encode(BYTE *strb, int strlen, BYTE *img, int offset)
@@ -202,17 +325,7 @@ char *decode(BYTE *img)
         exit(1);
     }
     load_str_bytes(img, msg_length, end_bit, str_bytes);
-    char *str = (char *) malloc(sizeof(char) * msg_length);
-    if ( str == NULL)
-    {
-        printf("Cannot allocate memory for decoded string!");
-        exit(1);
-    }
-    for ( int i = 0; i < msg_length; i++ )
-    {
-        str[i] = (char) str_bytes[i];
-    }
-    return str;
+    return str_bytes;
 }
 
 void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_bytes)
