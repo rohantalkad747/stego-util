@@ -46,7 +46,7 @@ BYTE *itob(int num);
  * Encodes the byte representation of a string into the image.
  * Note the 32 bit length limit to the target text.
  */
-void encode(BYTE *strb, BYTE *img, int offset);
+void encode(BYTE *strb, int strlen, BYTE *img, int offset);
 
 /**
  * @return the string encoded in the given image, if it exists.
@@ -71,10 +71,12 @@ int get_msg_length(const BYTE *img, int end_bit);
 
 void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_bytes);
 
+void handle_fread_err(const FILE *fsrc);
+
 int main(int argc, char *argv[])
 {
-    encode_driver("my text", "port.png", "temp.png");
-    decode_driver("temp.png");
+    encode_driver("my text", "port.jpg", "temp.jpg");
+    decode_driver("temp.jpg");
 }
 
 int get_num_bytes(FILE *f)
@@ -100,9 +102,11 @@ void fcpy(FILE *ipf, FILE *opf)
 void decode_driver(char *filename)
 {
     FILE *fsrc = fopen(filename, "rb");
-    BYTE* bytes = ftob(fsrc);
+    int num_bytes = get_num_bytes(fsrc);
+    fseek(fsrc, 0L, SEEK_SET);
+    BYTE* bytes = (BYTE *) malloc(num_bytes);
+    fread(bytes, 1, num_bytes, fsrc);
     char* str = decode(bytes);
-    fclose(fsrc);
     printf("%s", str);
 }
 
@@ -111,70 +115,63 @@ void encode_driver(char *str, char *filename, char *destname)
 {
     FILE *fsrc = fopen(filename, "rb");
     int num_bytes = get_num_bytes(fsrc);
-
-    FILE *fdest = fopen(destname, "wb");
-
     fseek(fsrc, 0L, SEEK_SET);
-    fcpy(fsrc, fdest);
-    fclose(fsrc);
+    BYTE *img_bytes = (BYTE *) malloc(num_bytes);
+    size_t ret_code = fread(img_bytes, 1, num_bytes, fsrc);
+    if (ret_code == num_bytes)
+    {
+        int trgt_length = strlen(str);
+        BYTE *len_bytes = itob(trgt_length);
 
-    BYTE *img_bytes = (BYTE *) malloc(sizeof(BYTE) * num_bytes);
+        // Length of this encoding is 4 bytes because this is a 32 bit number
+        encode(len_bytes, 4, img_bytes, OFFSET);
 
-    fread(img_bytes, sizeof(img_bytes), 1, fdest);
+        BYTE *str_bytes = stob(str);
+        encode(str_bytes, trgt_length, img_bytes, OFFSET + 32);
 
-    BYTE *len_bytes = itob(strlen(str));
-
-    printf("%d \n", len_bytes[3]);
-    printf("%d \n", len_bytes[4]);
-
-
-    encode(len_bytes, img_bytes, OFFSET);
-
-    BYTE *str_bytes = stob(str);
-    encode(str_bytes, img_bytes, OFFSET + 32);
-
-    fclose(fdest);
+        FILE* fdest = fopen(destname, "wb");
+        fwrite(img_bytes, 1, num_bytes, fdest);
+    }
+    else
+    {
+        handle_fread_err(fsrc);
+    }
 }
 
-void encode(BYTE *strb, BYTE *img, int offset)
+void handle_fread_err(const FILE *fsrc)
 {
-    int len = sizeof(strb);
-    for ( int i = 0; i < len; i++ )
+    if ( ferror(fsrc) )
+        perror( "Error reading file" );
+    else if ( feof(fsrc) )
+        perror( "EOF found" );
+    else
+        perror("Error opening file");
+}
+
+void encode(BYTE *strb, int strlen, BYTE *img, int offset)
+{
+    printf("Encoding a message of %d bytes \n", strlen);
+    for ( int i = 0; i < strlen; i++ )
     {
         int addition = strb[i];
         for ( int b = 7; b >= 0; b--, offset++ )
         {
             int additionBit = (addition >> b) & 1;
             if ((additionBit != img[offset]) & 1 )
+            {
                 img[offset] = (img[offset] & 0xFE) | additionBit;
+            }
         }
     }
 }
 
 BYTE *itob(int num)
 {
-    BYTE *bytes = (BYTE *) malloc(sizeof(BYTE) * 4);
+    BYTE *bytes = (BYTE *) malloc( 4);
     bytes[0] = (num & 0xFF000000) >> 24;
     bytes[1] = (num & 0x00FF0000) >> 16;
     bytes[2] = (num & 0x0000FF00) >> 8;
     bytes[3] = num & 0x000000FF;
-    return bytes;
-}
-
-BYTE *ftob(FILE *file)
-{
-    int num_bytes = get_num_bytes(file);
-    BYTE *bytes = (BYTE *) malloc(num_bytes * sizeof(BYTE));
-    if ( bytes == NULL)
-    {
-        printf("Cannot allocate memory for byte array conversion!");
-        exit(1);
-    }
-    for ( int i = 0, c; (c = fgetc(file)) != EOF; i++ )
-    {
-        printf("%d", c);
-        bytes[i] = c;
-    }
     return bytes;
 }
 
@@ -198,7 +195,8 @@ char *decode(BYTE *img)
 {
     int end_bit = OFFSET + 32;
     int msg_length = get_msg_length(img, end_bit);
-    BYTE *str_bytes = (BYTE *) malloc(sizeof(BYTE) * msg_length);
+    printf("Decoding a message of length %d \n", msg_length);
+    BYTE *str_bytes = (BYTE *) malloc(msg_length);
     if ( str_bytes == NULL)
     {
         printf("Failed to allocate memory while decoding!");
@@ -211,11 +209,10 @@ char *decode(BYTE *img)
         printf("Cannot allocate memory for decoded string!");
         exit(1);
     }
-    while ( str_bytes != NULL)
+    for (int i = 0 ; i < msg_length; i++)
     {
-        *str++ = (char) *str_bytes++;
+        str[i] = (char) str_bytes[i];
     }
-    free(str_bytes);
     return str;
 }
 
