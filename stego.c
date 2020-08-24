@@ -9,9 +9,19 @@
  * Both the length of the message and the message are stored contiguously
  * as LSBs starting the 24th bit, although this can be modified. The length is stored
  * over 32 bits and the actual message is stored after that.
+ *
+ * Simply move an executable verson file into usr/local/bin.
+ *
+ * Application Programming Interface:
+ *
+ * stego encode --msg <your message to encode> --src <your source image> --dest <the destination location>
+ *
+ * stego decode <your source image>
+ *
+ *
  */
 
-/* Index of byte where we start encoding the length and message */
+/* Index of bit where we start encoding the length and message */
 #define OFFSET 24
 
 typedef unsigned char BYTE;
@@ -21,56 +31,58 @@ BYTE* itob(int num);
 void encode(BYTE* strb, BYTE* img, int offset);
 char* decode(BYTE* img);
 int get_num_bytes(FILE* f);
-int encode_driver(char* str, char* filename);
+void encode_driver(char* str, char* filename, char* destname);
+void decode_driver(char* filename);
 void fcpy(FILE *, FILE *);
-int cat(int argc, char *argv[]);
 
+int main(int argc, char* argv[]) {
+    encode_driver("my text", "port.png", "temp.png");
+}
 
 int get_num_bytes(FILE* f) {
     int bytes = 0;
-    while (getc(f) != EOF)
+    while (fgetc(f) != EOF)
         bytes++;
     return bytes;
-}
-
-int cat(int argc, char *argv[])
-{
-    FILE *f;
-    if (argc == 1) {
-        fcpy(stdin, stdout);
-        putc('\n', stdout);
-    } else {
-        while (--argc) {
-            if ((f = fopen(*++argv, "r")) != NULL) {
-                fcpy(f, stdout);
-                fclose(f);
-                putc('\n', stdout);
-            }
-        }
-    }
-    return 0;
 }
 
 void fcpy(FILE *ipf, FILE *opf)
 {
     int c;
-    while ((c = getc(ipf)) != EOF)
-        putc(c, opf);
+    while ((c = fgetc(ipf)) != EOF)
+        fputc(c, opf);
+}
+
+void decode_driver(char* filename) {
+//    FILE* fsrc = fopen(filename, "rb");
+//    decode(fsrc);
+//    fclose(fsrc);
 }
 
 
-int encode_driver(char* str, char* filename) {
+void encode_driver(char* str, char* filename, char* destname) {
     FILE* fsrc = fopen(filename, "rb");
+    FILE* fdest = fopen(destname, "wb");
 
-    int num_bytes = get_num_bytes(fsrc);
+    fcpy(fsrc, fdest);
+
+    fclose(fsrc);
+
+    int num_bytes = get_num_bytes(fdest);
+
+    printf("Encode target file with size %d b ", num_bytes);
+
     BYTE* img_bytes = (BYTE *) malloc (sizeof(BYTE) * num_bytes);
-    fread(img_bytes, sizeof(img_bytes),1,fsrc);
+    fread(img_bytes, sizeof(img_bytes),1,fdest);
 
-    BYTE* len_bytes = itob(strlen(str));
+    int len = strlen(str);
+    BYTE* len_bytes = itob(len);
     encode(len_bytes, img_bytes, OFFSET);
 
     BYTE* str_bytes = stob(str);
     encode(str_bytes, img_bytes, OFFSET + 32);
+
+    fclose(fdest);
 }
 
 void encode(BYTE* strb, BYTE* img, int offset) {
@@ -80,17 +92,17 @@ void encode(BYTE* strb, BYTE* img, int offset) {
         for (int b = 7; b >= 0; b--, offset++) {
             int additionBit = (addition >> b) & 1;
             if ((additionBit != img[offset]) & 1)
-                img[offset] = (img[offset] & 0xfe) | additionBit;
+                img[offset] = (img[offset] & 0xFE) | additionBit;
         }
     }
 }
 
 BYTE* itob(int num) {
     BYTE* bytes = (BYTE*) malloc(sizeof(BYTE) * 4);
-    bytes[0] = (num & 0xff000000) >> 24;
-    bytes[1] = (num & 0x00ff0000) >> 16;
-    bytes[2] = (num & 0x0000ff00) >> 8;
-    bytes[3] = num & 0x000000ff;
+    bytes[0] = (num & 0xFF000000) >> 24;
+    bytes[1] = (num & 0x00FF0000) >> 16;
+    bytes[2] = (num & 0x0000FF00) >> 8;
+    bytes[3] = num & 0x000000FF;
     return bytes;
 }
 

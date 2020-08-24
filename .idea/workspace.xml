@@ -29,46 +29,52 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rohan\Downloads\files" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="files" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="sample.txt example.txt" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="files" TARGET_NAME="files" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="files" RUN_TARGET_NAME="files">
+    <configuration name="files" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="files" TARGET_NAME="files" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="files" RUN_TARGET_NAME="files">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595802978583">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598229242015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595802978583" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598229242015" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1595802903385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1595802903385" />
-    <state width="1877" height="332" key="GridCell.Tab.0.bottom" timestamp="1595806961026">
+    <state width="1877" height="161" key="GridCell.Tab.0.bottom" timestamp="1598231422082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595806961026" />
-    <state width="1877" height="332" key="GridCell.Tab.0.center" timestamp="1595806961026">
+    <state width="1877" height="161" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
+    <state width="1877" height="161" key="GridCell.Tab.0.center" timestamp="1598231422082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595806961026" />
-    <state width="1877" height="332" key="GridCell.Tab.0.left" timestamp="1595806961026">
+    <state width="1877" height="161" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
+    <state width="1877" height="161" key="GridCell.Tab.0.left" timestamp="1598231422082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595806961026" />
-    <state width="1877" height="332" key="GridCell.Tab.0.right" timestamp="1595806961026">
+    <state width="1877" height="161" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
+    <state width="1877" height="161" key="GridCell.Tab.0.right" timestamp="1598231422082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595806961026" />
+    <state width="1877" height="161" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
     <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog" timestamp="1595823643076">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595823643076" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1595824472882">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1598230394255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595824472882" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598230394255" />
   </component>
 </project>
