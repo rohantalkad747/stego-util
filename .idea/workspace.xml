@@ -30,6 +30,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -48,33 +49,72 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598229242015" />
+    <state width="422" height="466" key="DebuggerActiveHint" timestamp="1598244163204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="422" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1598244163204" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1595802903385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1595802903385" />
-    <state width="1877" height="161" key="GridCell.Tab.0.bottom" timestamp="1598231422082">
+    <state width="1877" height="142" key="GridCell.Tab.0.bottom" timestamp="1598244879754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="161" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
-    <state width="1877" height="161" key="GridCell.Tab.0.center" timestamp="1598231422082">
+    <state width="1877" height="142" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598244879754" />
+    <state width="1877" height="142" key="GridCell.Tab.0.center" timestamp="1598244879754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="161" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
-    <state width="1877" height="161" key="GridCell.Tab.0.left" timestamp="1598231422082">
+    <state width="1877" height="142" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598244879754" />
+    <state width="1877" height="142" key="GridCell.Tab.0.left" timestamp="1598244879753">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="161" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
-    <state width="1877" height="161" key="GridCell.Tab.0.right" timestamp="1598231422082">
+    <state width="1877" height="142" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598244879753" />
+    <state width="1877" height="142" key="GridCell.Tab.0.right" timestamp="1598244879754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="161" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598231422082" />
-    <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog" timestamp="1595823643076">
+    <state width="1877" height="142" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598244879754" />
+    <state width="1877" height="149" key="GridCell.Tab.1.bottom" timestamp="1598244824405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="806" y="356" width="550" height="409" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595823643076" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1598230394255">
+    <state width="1877" height="149" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598244824405" />
+    <state width="1877" height="149" key="GridCell.Tab.1.center" timestamp="1598244824404">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598230394255" />
+    <state width="1877" height="149" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598244824404" />
+    <state width="1877" height="149" key="GridCell.Tab.1.left" timestamp="1598244824404">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="149" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598244824404" />
+    <state width="1877" height="149" key="GridCell.Tab.1.right" timestamp="1598244824405">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="149" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598244824405" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1598232951733">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598232951733" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1598236988836">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1598236988836" />
+    <state x="806" y="356" width="550" height="397" key="refactoring.ChangeSignatureDialog" timestamp="1598233553216">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="806" y="356" width="550" height="397" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598233553216" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1598233215511">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598233215511" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/stego.c</url>
+          <line>155</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
