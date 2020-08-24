@@ -104,9 +104,9 @@ void decode_driver(char *filename)
     FILE *fsrc = fopen(filename, "rb");
     int num_bytes = get_num_bytes(fsrc);
     fseek(fsrc, 0L, SEEK_SET);
-    BYTE* bytes = (BYTE *) malloc(num_bytes);
+    BYTE *bytes = (BYTE *) malloc(num_bytes);
     fread(bytes, 1, num_bytes, fsrc);
-    char* str = decode(bytes);
+    char *str = decode(bytes);
     printf("%s", str);
 }
 
@@ -118,7 +118,7 @@ void encode_driver(char *str, char *filename, char *destname)
     fseek(fsrc, 0L, SEEK_SET);
     BYTE *img_bytes = (BYTE *) malloc(num_bytes);
     size_t ret_code = fread(img_bytes, 1, num_bytes, fsrc);
-    if (ret_code == num_bytes)
+    if ( ret_code == num_bytes )
     {
         int trgt_length = strlen(str);
         BYTE *len_bytes = itob(trgt_length);
@@ -129,10 +129,9 @@ void encode_driver(char *str, char *filename, char *destname)
         BYTE *str_bytes = stob(str);
         encode(str_bytes, trgt_length, img_bytes, OFFSET + 32);
 
-        FILE* fdest = fopen(destname, "wb");
+        FILE *fdest = fopen(destname, "wb");
         fwrite(img_bytes, 1, num_bytes, fdest);
-    }
-    else
+    } else
     {
         handle_fread_err(fsrc);
     }
@@ -140,10 +139,10 @@ void encode_driver(char *str, char *filename, char *destname)
 
 void handle_fread_err(const FILE *fsrc)
 {
-    if ( ferror(fsrc) )
-        perror( "Error reading file" );
-    else if ( feof(fsrc) )
-        perror( "EOF found" );
+    if ( ferror(fsrc))
+        perror("Error reading file");
+    else if ( feof(fsrc))
+        perror("EOF found");
     else
         perror("Error opening file");
 }
@@ -167,7 +166,7 @@ void encode(BYTE *strb, int strlen, BYTE *img, int offset)
 
 BYTE *itob(int num)
 {
-    BYTE *bytes = (BYTE *) malloc( 4);
+    BYTE *bytes = (BYTE *) malloc(4);
     bytes[0] = (num & 0xFF000000) >> 24;
     bytes[1] = (num & 0x00FF0000) >> 16;
     bytes[2] = (num & 0x0000FF00) >> 8;
@@ -209,7 +208,7 @@ char *decode(BYTE *img)
         printf("Cannot allocate memory for decoded string!");
         exit(1);
     }
-    for (int i = 0 ; i < msg_length; i++)
+    for ( int i = 0; i < msg_length; i++ )
     {
         str[i] = (char) str_bytes[i];
     }
