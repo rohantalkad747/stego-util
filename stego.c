@@ -86,7 +86,8 @@ void encode_length_and_message(const char *str, const char *destname, int num_by
 #define MAX_KEY 8
 #define MAX_DATA 12
 
-struct node {
+struct node
+{
     char key[MAX_KEY];
     char *value;
     struct node *next;
@@ -94,15 +95,18 @@ struct node {
 
 typedef struct node Node;
 
-Node * tb[MAX_TABLE];
+Node *tb[MAX_TABLE];
 char keys[MAX_DATA][MAX_KEY];
 int values[MAX_DATA];
 
-void init() {
-    for (int i = 0; i < MAX_TABLE; ++i) {
-        Node * cur = tb[i];
-        Node * tmp;
-        while (cur != NULL) {
+void init()
+{
+    for ( int i = 0; i < MAX_TABLE; ++i )
+    {
+        Node *cur = tb[i];
+        Node *tmp;
+        while ( cur != NULL)
+        {
             tmp = cur;
             cur = cur->next;
             free(tmp);
@@ -111,43 +115,51 @@ void init() {
     }
 }
 
-void my_str_cpy(char * dest, const char * src) {
-    while ((*dest++ = *src++) != '\0');
+void my_str_cpy(char *dest, const char *src)
+{
+    while ((*dest++ = *src++) != '\0' )
+    {}
 }
 
-int my_str_cmp(const char * str1, const char * str2) {
-    while (*str1 != '\0' && (*str1 == *str2)) {
+int my_str_cmp(const char *str1, const char *str2)
+{
+    while ( *str1 != '\0' && (*str1 == *str2))
+    {
         str1++;
         str2++;
     }
     return *str1 - *str2;
 }
 
-int hash(const char * str) {
+int hash(const char *str)
+{
     int hash = 401;
-    while (*str != '\0')
+    while ( *str != '\0' )
     {
-        hash = ((hash << 4) + (int)(*str)) % MAX_TABLE;
+        hash = ((hash << 4) + (int) (*str)) % MAX_TABLE;
         str++;
     }
     return hash % MAX_TABLE;
 }
 
-void add(const char * key, char * value) {
-    Node * new_node = (Node *)malloc(sizeof(Node));
+void add(const char *key, char *value)
+{
+    Node *new_node = (Node *) malloc(sizeof(Node));
     my_str_cpy(new_node->key, key);
     new_node->value = value;
     new_node->next = NULL;
     int index = hash(key);
-    if (tb[index] == NULL)
+    if ( tb[index] == NULL)
     {
         tb[index] = new_node;
     }
     else
     {
-        Node * cur = tb[index];
-        while (cur != NULL) {
-            if (my_str_cmp(cur->key, key) == 0) {
+        Node *cur = tb[index];
+        while ( cur != NULL)
+        {
+            if ( my_str_cmp(cur->key, key) == 0 )
+            {
                 cur->value = value;
                 return;
             }
@@ -158,15 +170,18 @@ void add(const char * key, char * value) {
     }
 }
 
-int find(const char * key, int * val) {
+int find(const char *key, int *val)
+{
 
     int index = hash(key);
 
-    Node * cur = tb[index];
+    Node *cur = tb[index];
 
     // Find key by traversing list one by one
-    while (cur != NULL) {
-        if (my_str_cmp(cur->key, key) == 0) {
+    while ( cur != NULL)
+    {
+        if ( my_str_cmp(cur->key, key) == 0 )
+        {
             *val = cur->value;
             return TRUE;
         }
@@ -182,14 +197,16 @@ int main(int argc, char *argv[])
     decode_driver("temp.jpg");
 }
 
-struct DataItem *parse_args(char *argv[]) {
+struct DataItem *parse_args(char *argv[])
+{
     char tmp_key[MAX_KEY];
     init();
 
 
-    char* c;
-    while ((c = *argv++) != NULL) {
-        if (c[0] == '-' && c[1] == '-')
+    char *c;
+    while ((c = *argv++) != NULL)
+    {
+        if ( c[0] == '-' && c[1] == '-' )
         {
             add(c, *argv++);
         }
@@ -238,7 +255,8 @@ void encode_driver(char *str, char *filename, char *destname)
     if ( ret_code == num_bytes )
     {
         encode_length_and_message(str, destname, num_bytes, img_bytes);
-    } else
+    }
+    else
     {
         handle_fread_err(fsrc);
     }
@@ -261,10 +279,12 @@ void handle_fread_err(const FILE *fsrc)
     if ( ferror(fsrc))
     {
         perror("Error reading file");
-    } else if ( feof(fsrc))
+    }
+    else if ( feof(fsrc))
     {
         perror("EOF found");
-    } else
+    }
+    else
     {
         perror("Error opening file");
     }
