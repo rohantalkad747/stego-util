@@ -17,10 +17,10 @@ For example, if you're using gcc:
 
 ```
 // (Windows) In CMD shell
-> gcc -o stego.exe stego.c
+> g++ src/cli_driver.c src/stego.c -o stego.exe
 
 // (Unixes / Mac OS X) In Bash shell
-$ gcc -o stego stego.c
+$ g++ src/stego.c src/cli_driver.c -o stego
 $ chmod a+x stego
 ```
 
@@ -42,7 +42,9 @@ I want to encode the text "Rohan Talkad rocks!" into this image.
 
 I will encode it via the following invocation:
 
-`stego encode --msg "Rohan Talkad rocks!" --src "examples/bird.jpg" --dest "examples/trgt.jpg"`
+```
+$ stego encode --msg "Rohan Talkad rocks!" --src "examples/bird.jpg" --dest "examples/trgt.jpg"
+```
 
 I should find an image at `examples/trgt.jpg`. Ideally, it should appear the same as `examples/bird.jpg`.
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="stego" targetName="test" />
       <config projectName="stego" targetName="stego" />
     </generated>
   </component>
@@ -21,6 +22,9 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-Debug-stego" />
+  </component>
   <component name="ProjectId" id="1fF91jbueez2z5vFgzCzDUlHLAU" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,14 +37,15 @@
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Rohan\Downloads\files\examples" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Rohan\Downloads\files" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rohan\Downloads\src\stego" />
+      <recent name="C:\Users\Rohan\Downloads\files\examples" />
+    </key>
   </component>
-  <component name="RunManager" selected="CMake Application.decode">
+  <component name="RunManager" selected="CMake Application.test">
     <configuration name="decode" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="decode &quot;examples/trgt.jpg&quot;" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="stego" TARGET_NAME="stego" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="stego" RUN_TARGET_NAME="stego">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -56,41 +61,59 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="stego" TARGET_NAME="test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="stego" RUN_TARGET_NAME="test">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="CMake Application.encode" />
       <item itemvalue="CMake Application.decode" />
       <item itemvalue="CMake Application.stego" />
+      <item itemvalue="CMake Application.test" />
     </list>
   </component>
   <component name="WindowStateProjectService">
-    <state x="268" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598316283895">
+    <state x="268" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598321173158">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="268" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598316283895" />
+    <state x="268" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598321173158" />
+    <state x="720" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598318991747">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="720" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1598318991747" />
+    <state x="594" y="358" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1598321141120">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="594" y="358" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598321141120" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598320778538">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598320778538" />
     <state width="422" height="466" key="DebuggerActiveHint" timestamp="1598244163204">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="422" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1598244163204" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1598316954519">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1598321171906">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598316954519" />
-    <state width="1877" height="257" key="GridCell.Tab.0.bottom" timestamp="1598317376425">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598321171906" />
+    <state width="1877" height="257" key="GridCell.Tab.0.bottom" timestamp="1598321259314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598317376425" />
-    <state width="1877" height="257" key="GridCell.Tab.0.center" timestamp="1598317376425">
+    <state width="1877" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598321259314" />
+    <state width="1877" height="257" key="GridCell.Tab.0.center" timestamp="1598321259314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="257" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598317376425" />
-    <state width="1877" height="257" key="GridCell.Tab.0.left" timestamp="1598317376425">
+    <state width="1877" height="257" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598321259314" />
+    <state width="1877" height="257" key="GridCell.Tab.0.left" timestamp="1598321259314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="257" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598317376425" />
-    <state width="1877" height="257" key="GridCell.Tab.0.right" timestamp="1598317376425">
+    <state width="1877" height="257" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598321259314" />
+    <state width="1877" height="257" key="GridCell.Tab.0.right" timestamp="1598321259314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="257" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598317376425" />
+    <state width="1877" height="257" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598321259314" />
     <state width="1877" height="204" key="GridCell.Tab.1.bottom" timestamp="1598315295208">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
