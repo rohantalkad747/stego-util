@@ -43,16 +43,16 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E re
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Rohan\Downloads\files
+CMAKE_SOURCE_DIR = C:\Users\Rohan\Downloads\stego
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Rohan\Downloads\files\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Rohan\Downloads\stego\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/files.dir/all
+all: CMakeFiles/stego.dir/all
 
 .PHONY : all
 
@@ -62,36 +62,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/files.dir/clean
+clean: CMakeFiles/stego.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/files.dir
+# Target rules for target CMakeFiles/stego.dir
 
 # All Build rule for target.
-CMakeFiles/files.dir/all:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/depend
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target files"
-.PHONY : CMakeFiles/files.dir/all
+CMakeFiles/stego.dir/all:
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/depend
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target stego"
+.PHONY : CMakeFiles/stego.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/files.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles 2
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/files.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/files.dir/rule
+CMakeFiles/stego.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/stego.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles/stego.dir/rule
 
 # Convenience name for target.
-files: CMakeFiles/files.dir/rule
+stego: CMakeFiles/stego.dir/rule
 
-.PHONY : files
+.PHONY : stego
 
 # clean rule for target.
-CMakeFiles/files.dir/clean:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/clean
-.PHONY : CMakeFiles/files.dir/clean
+CMakeFiles/stego.dir/clean:
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/clean
+.PHONY : CMakeFiles/stego.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

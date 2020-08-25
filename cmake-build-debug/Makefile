@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E re
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Rohan\Downloads\files
+CMAKE_SOURCE_DIR = C:\Users\Rohan\Downloads\stego
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Rohan\Downloads\files\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Rohan\Downloads\stego\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\files\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Rohan\Downloads\stego\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -110,17 +110,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named files
+# Target rules for targets named stego
 
 # Build rule for target.
-files: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 files
-.PHONY : files
+stego: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 stego
+.PHONY : stego
 
 # fast build rule for target.
-files/fast:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/build
-.PHONY : files/fast
+stego/fast:
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/build
+.PHONY : stego/fast
 
 stego.obj: stego.c.obj
 
@@ -128,7 +128,7 @@ stego.obj: stego.c.obj
 
 # target to build an object file
 stego.c.obj:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/stego.c.obj
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/stego.c.obj
 .PHONY : stego.c.obj
 
 stego.i: stego.c.i
@@ -137,7 +137,7 @@ stego.i: stego.c.i
 
 # target to preprocess a source file
 stego.c.i:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/stego.c.i
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/stego.c.i
 .PHONY : stego.c.i
 
 stego.s: stego.c.s
@@ -146,7 +146,7 @@ stego.s: stego.c.s
 
 # target to generate assembly for a file
 stego.c.s:
-	$(MAKE) -f CMakeFiles\files.dir\build.make CMakeFiles/files.dir/stego.c.s
+	$(MAKE) -f CMakeFiles\stego.dir\build.make CMakeFiles/stego.dir/stego.c.s
 .PHONY : stego.c.s
 
 # Help Target
@@ -155,8 +155,8 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
+	@echo ... stego
 	@echo ... edit_cache
-	@echo ... files
 	@echo ... rebuild_cache
 	@echo ... stego.obj
 	@echo ... stego.i

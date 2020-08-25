@@ -1,35 +1,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <time.h>
 
+#define MAX_TABLE 5
 
-/**
- * Provides text-encoding and decoding capabilities for images. Due to the nature of the algo (edits to bits),
- * regular image editors may be unable to view the encoded image. However, most BMP image will
- * retain their appearance, and hence BMP is the suggested image type to be used if appearance matters.
- * Both the length of the message and the message are stored contiguously
- * as LSBs starting the 24th bit. The length is stored over 32 bits and the actual message is stored after that.
- *
- * Instructions:
- *
- * Add an executable of stego.c to the PATH of your machine.
- *
- * Application Programming Interface:
- *
- * stego encode --msg <your message to encode> --src <your source image> --dest <the destination location>
- *
- * stego decode <your source image>
- *
- * Rohan Talkad
- */
+#define MAX_KEY 8
 
-/* Index of bit where we start encoding the length and message */
+#define MAX_DATA 12
+
 #define OFFSET 24
 
 #define TRUE 1
 
 #define FALSE 0
+
+#define ENCODE "encode"
+
+#define DECODE "decode"
+
+#define MESSAGE "msg"
+
+#define SOURCE "src"
+
+#define DEST "dest"
 
 typedef unsigned char BYTE;
 
@@ -73,18 +66,15 @@ void encode_driver(char *str, char *filename, char *destname);
 
 void decode_driver(char *filename);
 
-int get_msg_length(const BYTE *img, int end_bit);
+int get_msg_length(BYTE *img, int end_bit);
 
-void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_bytes);
+void load_str_bytes(BYTE *img, int msg_length, int end_bit, char *str_bytes);
 
-void handle_fread_err(const FILE *fsrc);
+void handle_fread_err(FILE *fsrc);
 
-void encode_length_and_message(const char *str, const char *destname, int num_bytes, const BYTE *img_bytes);
+void encode_length_and_message(char *str, char *destname, int num_bytes, BYTE *img_bytes);
 
-
-#define MAX_TABLE 5
-#define MAX_KEY 8
-#define MAX_DATA 12
+void parse_args(char *argv[]);
 
 struct node
 {
@@ -115,13 +105,13 @@ void init()
     }
 }
 
-void my_str_cpy(char *dest, const char *src)
+void my_str_cpy(char *dest, char *src)
 {
     while ((*dest++ = *src++) != '\0' )
     {}
 }
 
-int my_str_cmp(const char *str1, const char *str2)
+int my_str_cmp(char *str1, char *str2)
 {
     while ( *str1 != '\0' && (*str1 == *str2))
     {
@@ -131,7 +121,7 @@ int my_str_cmp(const char *str1, const char *str2)
     return *str1 - *str2;
 }
 
-int hash(const char *str)
+int hash(char *str)
 {
     int hash = 401;
     while ( *str != '\0' )
@@ -142,7 +132,7 @@ int hash(const char *str)
     return hash % MAX_TABLE;
 }
 
-void add(const char *key, char *value)
+void add(char *key, char *value)
 {
     Node *new_node = (Node *) malloc(sizeof(Node));
     my_str_cpy(new_node->key, key);
@@ -170,45 +160,65 @@ void add(const char *key, char *value)
     }
 }
 
-int find(const char *key, int *val)
+char *find(char *key)
 {
-
     int index = hash(key);
-
     Node *cur = tb[index];
-
-    // Find key by traversing list one by one
     while ( cur != NULL)
     {
         if ( my_str_cmp(cur->key, key) == 0 )
         {
-            *val = cur->value;
-            return TRUE;
+            return cur->value;
         }
         cur = cur->next;
     }
-    return FALSE;
 
 }
 
 int main(int argc, char *argv[])
 {
-    encode_driver("my text", "port.jpg", "temp.jpg");
-    decode_driver("temp.jpg");
+    char *stego_flag = argv[1];
+    if ( strcmp(stego_flag, ENCODE) == 0 )
+    {
+        if ( argc != 8 )
+        {
+            printf("Expected eight arguments but got %d arguments", argc);
+            exit(1);
+        }
+        parse_args(argv + 2);
+        encode_driver(
+                find(MESSAGE),
+                find(SOURCE),
+                find(DEST)
+        );
+    }
+    else if ( strcmp(stego_flag, DECODE) == 0 )
+    {
+        if ( argc != 3 )
+        {
+            printf("Expected three arguments but got %d arguments", argc);
+            exit(1);
+        }
+        decode_driver(argv[2]);
+    }
+    else
+    {
+        printf("Invalid command: %s", stego_flag);
+        exit(1);
+    }
 }
 
-struct DataItem *parse_args(char *argv[])
+void parse_args(char *argv[])
 {
-    char tmp_key[MAX_KEY];
     init();
-
-
     char *c;
+    printf("Parsed Arguments \n");
     while ((c = *argv++) != NULL)
     {
         if ( c[0] == '-' && c[1] == '-' )
         {
-            add(c, *argv++);
+            add(c + 2, *argv++);
+            printf("(%s => %s) \n", c + 2, find(c + 2));
         }
     }
 }
@@ -220,7 +230,6 @@ int get_num_bytes(FILE *f)
     {
         bytes++;
     }
-    printf("File with size %d b \n", bytes);
     return bytes;
 }
 
@@ -247,6 +256,11 @@ void decode_driver(char *filename)
 
 void encode_driver(char *str, char *filename, char *destname)
 {
+    if ( str == NULL || filename == NULL || destname == NULL)
+    {
+        printf("encode_driver parameters cannot be null!");
+        exit(1);
+    }
     FILE *fsrc = fopen(filename, "rb");
     int num_bytes = get_num_bytes(fsrc);
     fseek(fsrc, 0L, SEEK_SET);
@@ -262,7 +276,7 @@ void encode_driver(char *str, char *filename, char *destname)
     }
 }
 
-void encode_length_and_message(const char *str, const char *destname, int num_bytes, const BYTE *img_bytes)
+void encode_length_and_message(char *str, char *destname, int num_bytes, BYTE *img_bytes)
 {
     int trgt_length = strlen(str);
     BYTE *len_bytes = itob(trgt_length);
@@ -274,7 +288,7 @@ void encode_length_and_message(const char *str, const char *destname, int num_by
     fwrite(img_bytes, 1, num_bytes, fdest);
 }
 
-void handle_fread_err(const FILE *fsrc)
+void handle_fread_err(FILE *fsrc)
 {
     if ( ferror(fsrc))
     {
@@ -337,8 +351,7 @@ char *decode(BYTE *img)
 {
     int end_bit = OFFSET + 32;
     int msg_length = get_msg_length(img, end_bit);
-    printf("Decoding a message of length %d \n", msg_length);
-    BYTE *str_bytes = (BYTE *) malloc(msg_length);
+    char *str_bytes = (char *) malloc(msg_length);
     if ( str_bytes == NULL)
     {
         printf("Failed to allocate memory while decoding!");
@@ -348,7 +361,7 @@ char *decode(BYTE *img)
     return str_bytes;
 }
 
-void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_bytes)
+void load_str_bytes(BYTE *img, int msg_length, int end_bit, char *str_bytes)
 {
     for ( int j = 0; j < msg_length; j++ )
     {
@@ -357,9 +370,10 @@ void load_str_bytes(const BYTE *img, int msg_length, int end_bit, BYTE *str_byte
             str_bytes[j] = (str_bytes[j] << 1) | (img[end_bit] & 1);
         }
     }
+    str_bytes[msg_length] = '\0';
 }
 
-int get_msg_length(const BYTE *img, int end_bit)
+int get_msg_length(BYTE *img, int end_bit)
 {
     int msg_length = 0;
     for ( int i = OFFSET; i < end_bit; i++ )
