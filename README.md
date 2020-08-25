@@ -17,10 +17,10 @@ For example, if you're using gcc:
 
 ```
 // (Windows) In CMD shell
-> g++ src/cli_driver.c src/stego.c -o stego.exe
+> gcc src/cli_driver.c src/stego.c -o stego.exe
 
 // (Unixes / Mac OS X) In Bash shell
-$ g++ src/stego.c src/cli_driver.c -o stego
+$ gcc src/stego.c src/cli_driver.c -o stego
 $ chmod a+x stego
 ```
 
