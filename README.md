@@ -9,11 +9,9 @@ Both the length of the message and the message are
 stored contiguously as LSBs starting from the third byte. The length is stored over four bytes and the actual message is stored after that.
 This of course means that the image must be large enough to accommodate the offset and bytes to encode.
  
-### Instructions
+### Build Process
 
-Generate an executable of stego.c.
-
-For example, if you're using gcc:
+#### gcc
 
 ```
 // (Windows) In CMD shell
@@ -24,9 +22,9 @@ $ gcc src/stego.c src/cli_driver.c -o stego
 $ chmod a+x stego
 ```
 
-If you find it useful, add it to the PATH of your machine.
+If you find it useful, add it to the path of your machine.
 
-Application Programming Interface:
+### Application Programming Interface
  
 `stego encode --msg <your message to encode> --src <your source image> --dest <the destination location>`
  
