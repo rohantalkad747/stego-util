@@ -3,7 +3,7 @@
 ### Description
 
 Provides text-encoding and decoding capabilities for images. Due to the nature of the algorithm (direct modifications to image bits),
-some image editors may be unable to view some encoded images. Note that the input image is not affected since a copy is always created.
+some image editors may be unable to view some encoded images. Note that the input image is not affected.
 
 Both the length of the message and the message are
 stored contiguously as LSBs starting from the third byte. The length is stored over four bytes and the actual message is stored after that.
