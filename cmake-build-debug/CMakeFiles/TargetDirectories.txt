@@ -1,3 +1,0 @@
-C:/Users/Rohan/Downloads/stego/cmake-build-debug/CMakeFiles/stego.dir
-C:/Users/Rohan/Downloads/stego/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Rohan/Downloads/stego/cmake-build-debug/CMakeFiles/rebuild_cache.dir
